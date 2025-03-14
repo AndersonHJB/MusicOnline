@@ -54,9 +54,11 @@ spring:
       max-request-size: 20MB
   mvc:
     # 设置静态资源路径 防止所有请求都去查静态资源
-    static-path-pattern: /static/**
+    static-path-pattern: /**
     format:
       date-time: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
   jackson:
     # 日期格式化
     date-format: yyyy-MM-dd HH:mm:ss
@@ -78,10 +80,9 @@ spring:
         master:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3308/tb_task?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://127.0.0.1:3308/musicOnline?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
           username: root
           password: root
-
   # redis通用配置 子服务可以自行配置进行覆盖
   data:
     redis:
@@ -141,3 +142,7 @@ security:
     - /*/api-docs
     - /*/api-docs/**
     - /warm-flow-ui/token-name
+    - /login
+    - /register
+    - /page/**
+    - /

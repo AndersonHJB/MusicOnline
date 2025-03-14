@@ -64,17 +64,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                                     }
                                 }
 
-                                // 检查 header 与 param 里的 clientid 与 token 里的是否一致
-                                String headerCid = request.getHeader(LoginHelper.CLIENT_KEY);
-                                String paramCid = ServletUtils.getParameter(LoginHelper.CLIENT_KEY);
-                                String clientId = StpUtil.getExtra(LoginHelper.CLIENT_KEY).toString();
-                                if (!StringUtils.equalsAny(clientId, headerCid, paramCid)) {
-                                    // token 无效
-                                    throw NotLoginException.newInstance(StpUtil.getLoginType(),
-                                            "-100", "客户端ID与Token不匹配",
-                                            StpUtil.getTokenValue());
-                                }
-
 
                             });
                 })).addPathPatterns("/**")

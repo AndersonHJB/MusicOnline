@@ -1,18 +1,21 @@
 package com.example.musiconline.config.mybatis;
 
+import cn.hutool.core.net.NetUtil;
 import com.baomidou.mybatisplus.autoconfigure.DdlApplicationRunner;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.ddl.IDdl;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
 /**
- * @author lds
- * @date 2025/3/10
+ * MybatisPlus配置
  */
 @Configuration
 public class MybatisPlusConfiguration {
@@ -40,5 +43,15 @@ public class MybatisPlusConfiguration {
     @Bean
     public DdlApplicationRunner ddlApplicationRunner(@Autowired(required = false) List<IDdl> ddlList) {
         return new DdlApplicationRunner(ddlList);
+    }
+
+    /**
+     * 使用网卡信息绑定雪花生成器
+     * 防止集群雪花ID重复
+     */
+    @Primary
+    @Bean
+    public IdentifierGenerator idGenerator() {
+        return new DefaultIdentifierGenerator(NetUtil.getLocalhost());
     }
 }
