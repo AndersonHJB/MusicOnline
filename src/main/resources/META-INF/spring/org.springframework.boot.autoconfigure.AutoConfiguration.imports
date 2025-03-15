@@ -1,3 +1,2 @@
-com.example.musiconline.config.redis.RedisConfiguration
 com.example.musiconline.config.security.handler.GlobalExceptionHandler
 com.example.musiconline.config.security.config.SecurityConfiguration

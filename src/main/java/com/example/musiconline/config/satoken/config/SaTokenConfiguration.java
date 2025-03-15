@@ -25,12 +25,12 @@ public class SaTokenConfiguration {
     }
 
 
-    /**
-     * 自定义dao层存储
-     */
-    @Bean
-    public SaTokenDao saTokenDao() {
-        return new PlusSaTokenDao();
-    }
+//    /**
+//     * 自定义dao层存储
+//     */
+//    @Bean
+//    public SaTokenDao saTokenDao() {
+//        return new PlusSaTokenDao();
+//    }
 
 }

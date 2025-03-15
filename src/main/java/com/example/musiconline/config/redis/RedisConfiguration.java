@@ -19,6 +19,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * redis配置
@@ -26,7 +27,7 @@ import org.springframework.context.annotation.Bean;
  * @author ll
  */
 @Slf4j
-@AutoConfiguration
+//@Configuration
 @EnableCaching
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedisConfiguration {
