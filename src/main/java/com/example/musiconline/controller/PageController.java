@@ -25,6 +25,7 @@ public class PageController {
     @GetMapping({"/","/page/index"})
     public String index(HttpServletRequest request) {
         request.setAttribute("path", "index");
+        request.setAttribute("vinylCount", 100);
         request.setAttribute("albumCount", 100);
         return "admin/index";
     }
