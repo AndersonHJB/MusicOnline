@@ -2,6 +2,7 @@ package com.example.musiconline.controller;
 
 
 import com.example.musiconline.domain.R;
+import com.example.musiconline.domain.bo.SysUserBo;
 import com.example.musiconline.domain.vo.LoginVo;
 import com.example.musiconline.model.LoginBody;
 import com.example.musiconline.service.impl.SysUserService;
@@ -53,9 +54,9 @@ public class TokenController {
      * 用户注册
      */
     @PostMapping("register")
-    public R<Void> register(@RequestBody LoginBody registerBody) {
+    public R<Void> register(@RequestBody SysUserBo bo) {
         // 用户注册
-        sysUserService.register(registerBody);
+        sysUserService.register(bo);
         return R.ok();
     }
 

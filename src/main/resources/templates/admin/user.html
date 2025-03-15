@@ -26,6 +26,15 @@
     font-size: 80%;
     color: #dc3545;
   }
+
+  .clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+  }
 </style>
 <div class="wrapper">
   <!-- 引入页面头header-fragment -->
@@ -34,14 +43,9 @@
   <div th:replace="~{admin/sidebar::sidebar-fragment(${path})}"></div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (图标header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">用户管理</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- Main content -->
@@ -53,47 +57,42 @@
           </div> <!-- /.card-header -->
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col-md-3">
+              <div class="col-md-3 position-relative">
                 <label for="searchUserName">用户名:</label>
-                <input type="text" class="form-control" id="searchUserName" placeholder="请输入用户名">
+                <input type="text" class="form-control" id="searchUserName" placeholder="请输入用户名" autocomplete="username">
+                <i class="fa fa-times clear-icon" id="clearSearchUserName"></i>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 position-relative">
                 <label for="searchUserEmail">邮箱:</label>
-                <input type="email" class="form-control" id="searchUserEmail" placeholder="请输入邮箱">
+                <input type="email" class="form-control" id="searchUserEmail" placeholder="请输入邮箱" autocomplete="email">
+                <i class="fa fa-times clear-icon" id="clearSearchUserEmail"></i>
               </div>
               <div class="col-md-3">
                 <label for="searchUserRole">角色:</label>
                 <select class="form-control" id="searchUserRole">
-                  <option value= "">所有角色</option>
-                  <option value= 0>普通用户</option>
-                  <option value= 1>管理员</option>
+                  <option value="">所有角色</option>
+                  <option value="0">普通用户</option>
+                  <option value="1">管理员</option>
                 </select>
               </div>
               <div class="col-md-3">
                 <label for="searchUserStatus">状态:</label>
                 <select class="form-control" id="searchUserStatus">
                   <option value="">所有状态</option>
-                  <option value="active">活跃</option>
-                  <option value="inactive">禁用</option>
+                  <option value="1">活跃</option>
+                  <option value="0">禁用</option>
                 </select>
               </div>
             </div>
             <div class="grid-btn">
-              <button class="btn btn-info" onclick="userAdd()"><i
-                      class="fa fa-plus"></i>&nbsp;新增
-              </button>
-              <button class="btn btn-info" onclick="userEdit()"><i
-                      class="fa fa-pencil-square-o"></i>&nbsp;修改
-              </button>
-              <button class="btn btn-danger" onclick="deleteUser()"><i
-                      class="fa fa-trash-o"></i>&nbsp;删除
-              </button>
-              <button class="btn btn-primary" onclick="searchUsers()"><i
-                      class="fa fa-search"></i>&nbsp;查询
-              </button>
+              <button class="btn btn-info" onclick="userAdd()"><i class="fa fa-plus"></i>&nbsp;新增</button>
+              <button class="btn btn-info" onclick="userEdit()"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</button>
+              <button class="btn btn-danger" onclick="deleteUser()"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+              <button class="btn btn-primary" onclick="searchUsers()"><i class="fa fa-search"></i>&nbsp;查询</button>
+              <button class="btn btn-secondary" onclick="resetSearchForm()"><i class="fa fa-refresh"></i>&nbsp;重置</button>
+              <button class="btn btn-warning" onclick="resetPassword()"><i class="fa fa-key"></i>&nbsp;重置密码</button> <!-- 新增重置密码按钮 -->
             </div>
-            <table id="jqGrid" class="table table-bordered">
-            </table>
+            <table id="jqGrid" class="table table-bordered"></table>
             <div id="jqGridPager"></div>
           </div><!-- /.card-body -->
         </div>
@@ -106,8 +105,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                      aria-hidden="true">&times;</span></button>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h6 class="modal-title" id="userModalLabel">Modal</h6>
             </div>
             <div class="modal-body">
@@ -120,52 +118,31 @@
                 <input type="hidden" class="form-control" id="userId" name="userId">
                 <div class="form-group">
                   <label for="userName" class="control-label">用户名:</label>
-                  <input type="text" class="form-control" id="userName" name="userName"
-                         placeholder="请输入用户名" required="true">
+                  <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名" required="true" autocomplete="username">
                   <div class="invalid-feedback" id="userNameFeedback"></div>
                 </div>
                 <div class="form-group">
                   <label for="userEmail" class="control-label">邮箱:</label>
-                  <input type="email" class="form-control" id="userEmail" name="userEmail"
-                         placeholder="请输入邮箱" required="true">
+                  <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="请输入邮箱" required="true" autocomplete="email">
                   <div class="invalid-feedback" id="userEmailFeedback"></div>
                 </div>
                 <div class="form-group">
                   <label for="userPhone" class="control-label">手机号:</label>
-                  <input type="text" class="form-control" id="userPhone" name="userPhone"
-                         placeholder="请输入手机号" required="true">
+                  <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入手机号" required="true" autocomplete="tel">
                   <div class="invalid-feedback" id="userPhoneFeedback"></div>
-                </div>
-                <div class="form-group" id="currentPasswordGroup" style="display: none;">
-                  <label for="currentPassword" class="control-label">当前密码:</label>
-                  <input type="password" class="form-control" id="currentPassword" name="currentPassword"
-                         placeholder="请输入当前密码" required="true">
-                  <div class="invalid-feedback" id="currentPasswordFeedback"></div>
-                </div>
-                <div class="form-group">
-                  <label for="userPassword" class="control-label">密码:</label>
-                  <input type="password" class="form-control" id="userPassword" name="userPassword"
-                         placeholder="请输入密码" required="true">
-                  <div class="invalid-feedback" id="userPasswordFeedback"></div>
-                </div>
-                <div class="form-group">
-                  <label for="confirmPassword" class="control-label">确认密码:</label>
-                  <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                         placeholder="请确认密码" required="true">
-                  <div class="invalid-feedback" id="confirmPasswordFeedback"></div>
                 </div>
                 <div class="form-group">
                   <label for="userRole" class="control-label">角色:</label>
                   <select class="form-control" id="userRole" name="userRole">
-                    <option selected="selected" value="user">普通用户</option>
-                    <option value="admin">管理员</option>
+                    <option selected="selected" value="0">普通用户</option>
+                    <option value="1">管理员</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="userStatus" class="control-label">状态:</label>
                   <select class="form-control" id="userStatus" name="userStatus">
-                    <option selected="selected" value="active">活跃</option>
-                    <option value="inactive">禁用</option>
+                    <option selected="selected" value="1">活跃</option>
+                    <option value="0">禁用</option>
                   </select>
                 </div>
               </form>
@@ -197,6 +174,7 @@
 <!-- sweetalert -->
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
 <script th:src="@{/admin/dist/js/user.js}"></script>
 </body>
 </html>

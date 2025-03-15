@@ -30,17 +30,25 @@
                                     </div>
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>登陆名称</label>
-                                        <input type="text" class="form-control" id="loginUserName"
-                                               name="loginUserName"
-                                               placeholder="请输入登陆名称" required="true" th:value="${loginUserName}">
+                                        <label>用户账号</label>
+                                        <input type="text" class="form-control" id="userName"
+                                               name="userName"
+                                               placeholder="请输入用户账号" required="true">
                                     </div>
                                     <div class="form-group">
-                                        <label>昵称</label>
-                                        <input type="text" class="form-control" id="nickName"
-                                               name="nickName"
-                                               placeholder="请输入昵称" required="true" th:value="${nickName}">
+                                        <label>用户邮箱</label>
+                                        <input type="email" class="form-control" id="userEmail"
+                                               name="userEmail"
+                                               placeholder="请输入用户邮箱" required="true">
                                     </div>
+                                    <div class="form-group">
+                                        <label>手机号码</label>
+                                        <input type="text" class="form-control" id="userPhone"
+                                               name="userPhone"
+                                               placeholder="请输入手机号码" required="true">
+                                    </div>
+                                    <!-- 添加隐藏的用户ID字段 -->
+                                    <input type="hidden" id="userId" name="userId" th:value="${userId}">
                                     <div class="card-footer">
                                         <button type="button" id="updateUserNameButton" onsubmit="return false;"
                                                 class="btn btn-danger float-right">确认修改
@@ -63,13 +71,13 @@
                                     <!-- input states -->
                                     <div class="form-group">
                                         <label class="control-label"><i class="fa fa-key"></i> 原密码</label>
-                                        <input type="text" class="form-control" id="originalPassword"
+                                        <input type="password" class="form-control" id="originalPassword"
                                                name="originalPassword"
                                                placeholder="请输入原密码" required="true">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label"><i class="fa fa-key"></i> 新密码</label>
-                                        <input type="text" class="form-control" id="newPassword" name="newPassword"
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword"
                                                placeholder="请输入新密码" required="true">
                                     </div>
                                     <div class="card-footer">
@@ -100,7 +108,9 @@
 <script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
 <!-- public.js -->
 <script th:src="@{/admin/dist/js/public.js}"></script>
-<!-- profile -->
-<script th:src="@{/admin/dist/js/profile.js}"></script>
+<!-- info -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/info.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
 </body>
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>唱片管理</title>
+    <header th:replace="~{admin/header::header-fragment}"></header>
+</head>
+<body class="hold-transition sidebar-mini">
+<style>
+    .ui-jqgrid tr.jqgrow td {
+        white-space: normal !important;
+        height: auto;
+        vertical-align: text-top;
+        padding-top: 2px;
+    }
+    .is-invalid {
+        border-color: #dc3545;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        color: #dc3545;
+    }
+
+    .clear-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #999;
+    }
+</style>
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="~{admin/header::header-nav}"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="~{admin/sidebar::sidebar-fragment(${path})}"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (图标header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">唱片管理</h3>
+                    </div> <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-3 position-relative">
+                                <label for="keywordSingleName">单曲名称:</label>
+                                <input type="text" class="form-control" id="keywordSingleName" placeholder="请输入单曲名称">
+                                <i class="fa fa-times clear-icon" onclick="clearInput('keywordSingleName')"></i>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="keywordVinylTitle">唱片标题:</label>
+                                <input type="text" class="form-control" id="keywordVinylTitle" placeholder="请输入唱片标题">
+                                <i class="fa fa-times clear-icon" onclick="clearInput('keywordVinylTitle')"></i>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="keywordArtist">艺术家:</label>
+                                <input type="text" class="form-control" id="keywordArtist" placeholder="请输入艺术家">
+                                <i class="fa fa-times clear-icon" onclick="clearInput('keywordArtist')"></i>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="keywordAlbumName">专辑名称:</label>
+                                <select class="form-control" id="keywordAlbumName">
+                                    <option value="">请选择专辑名称</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid-btn">
+                            <button class="btn btn-success" onclick="addVinyl()"><i class="fa fa-plus"></i>&nbsp;新增</button>
+                            <button class="btn btn-info" onclick="editVinyl()"><i class="fa fa-edit"></i>&nbsp;修改</button>
+                            <button class="btn btn-danger" onclick="deleteVinyl()"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+                            <button class="btn btn-info" onclick="searchVinyl()"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                            <button class="btn btn-secondary" onclick="resetSearch()"><i class="fa fa-refresh"></i>&nbsp;重置</button>
+                        </div>
+                        <!-- JqGrid必要DOM,用于创建表格展示列表数据 -->
+                        <table id="jqGrid" class="table table-bordered"></table>
+                        <!-- JqGrid必要DOM,分页信息区域 -->
+                        <div id="jqGridPager"></div>
+                    </div><!-- /.card-body -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="~{admin/footer::footer-fragment}"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/admin/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!-- jqgrid -->
+<script th:src="@{/admin/plugins/jqgrid-5.7.0/jquery.jqGrid.min.js}"></script>
+<script th:src="@{/admin/plugins/jqgrid-5.7.0/grid.locale-cn.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/public.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
+<script th:src="@{/admin/dist/js/vinyl.js}"></script>
+
+</body>
+</html>

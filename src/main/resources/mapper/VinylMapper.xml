@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.musiconline.mapper.VinylMapper">
+  <resultMap id="BaseResultMap" type="com.example.musiconline.domain.Vinyl">
+    <!--@mbg.generated-->
+    <!--@Table vinyl-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="single_name" jdbcType="VARCHAR" property="singleName" />
+    <result column="vinyl_title" jdbcType="VARCHAR" property="vinylTitle" />
+    <result column="vinyl_cover" jdbcType="VARCHAR" property="vinylCover" />
+    <result column="artist" jdbcType="VARCHAR" property="artist" />
+    <result column="album_id" jdbcType="BIGINT" property="albumId" />
+    <result column="issue_date" jdbcType="DATE" property="issueDate" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, single_name, vinyl_title, vinyl_cover, artist, album_id, issue_date, price, del_flag, 
+    create_by, create_time, update_by, update_time
+  </sql>
+
+  <select id="selectVinyPage" resultType="com.example.musiconline.domain.vo.VinylVo">
+    select * from
+    (select
+      v.id,
+      v.single_name,
+      v.vinyl_title,
+      v.vinyl_cover,
+      v.artist,
+      v.album_id,
+      v.issue_date,
+      v.price,
+      v.del_flag,
+      v.create_by,
+      v.create_time,
+      v.update_by,
+      v.update_time,
+      a.album_name
+    from vinyl v
+    left join album a on v.album_id = a.id) T
+    ${ew.customSqlSegment}
+  </select>
+</mapper>

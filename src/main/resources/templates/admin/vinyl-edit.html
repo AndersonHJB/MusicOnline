@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>发布唱片</title>
+    <header th:replace="~{admin/header::header-fragment}"></header>
+    <link th:href="@{/admin/plugins/editormd/css/editormd.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/plugins/select2/select2.css}" rel="stylesheet"/>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="~{admin/header::header-nav}"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="~{admin/sidebar::sidebar-fragment(${path})}"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">发布唱片</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="vinylForm" onsubmit="return false;">
+                            <div class="form-group" style="display: flex; align-items: center;">
+                                <input type="hidden" id="vinylId" name="vinylId" th:value="${vinyl!=null and vinyl.id!=null }?${vinyl.id}: null">
+
+                                <label for="singleName" class="col-auto col-form-label" style="margin-right: 10px;">单曲名称:</label>
+                                <div class="col" style="flex: 1;">
+                                    <input type="text" class="form-control" id="singleName" name="singleName"
+                                           placeholder="*请输入单曲名称(必填)"
+                                           th:value="${vinyl!=null and vinyl.singleName!=null }?${vinyl.singleName}: ''"
+                                           required>
+                                </div>
+
+                                <label for="vinylTitle" class="col-auto col-form-label" style="margin-right: 10px;">唱片标题:</label>
+                                <div class="col" style="flex: 1;">
+                                    <input type="text" class="form-control" id="vinylTitle" name="vinylTitle"
+                                           placeholder="*请输入唱片标题(必填)"
+                                           th:value="${vinyl!=null and vinyl.vinylTitle!=null }?${vinyl.vinylTitle}: ''"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: flex; align-items: center;">
+                                <label for="artist" class="col-auto col-form-label" style="margin-right: 10px;">艺术家:</label>
+                                <div class="col" style="flex: 1;">
+                                    <input type="text" class="form-control" id="artist" name="artist"
+                                           placeholder="请输入艺术家"
+                                           th:value="${vinyl!=null and vinyl.artist!=null }?${vinyl.artist}: ''"
+                                           required>
+                                </div>
+
+                                <label for="albumId" class="col-auto col-form-label" style="margin-right: 10px;">专辑名称:</label>
+                                <div class="col" style="flex: 1;">
+                                    <select class="form-control select2" style="width: 100%;" id="albumId" data-placeholder="请选择专辑..." data-allow-clear="true">
+                                        <th:block th:if="${null == albums}">
+                                            <option value="" selected="selected">默认专辑</option>
+                                        </th:block>
+                                        <th:block th:unless="${null == albums}">
+                                            <option value="">请选择专辑...</option> <!-- 这里是默认空值 -->
+                                            <th:block th:each="a : ${albums}">
+                                                <option th:value="${a.id}" th:text="${a.albumName}"
+                                                        th:selected="${vinyl != null and vinyl.albumId != null and vinyl.albumId == a.id}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: flex; align-items: center;">
+                                <label for="issueDate" class="col-auto col-form-label" style="margin-right: 10px;">发行日期:</label>
+                                <div class="col" style="flex: 1;">
+                                    <input type="date" class="form-control" id="issueDate" name="issueDate"
+                                           placeholder="请输入发行日期"
+                                           th:value="${vinyl!=null and vinyl.issueDate!=null }?${#dates.format(vinyl.issueDate, 'yyyy-MM-dd')}: ''"
+                                           required>
+                                </div>
+
+                                <label for="price" class="col-auto col-form-label" style="margin-right: 10px;">价格:</label>
+                                <div class="col" style="flex: 1;">
+                                    <input type="number" class="form-control" id="price" name="price"
+                                           placeholder="请输入价格"
+                                           th:value="${vinyl!=null and vinyl.price!=null }?${vinyl.price}: ''"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vinylCoverImage" class="col-auto col-form-label">唱片封面:</label>
+                                <div class="col">
+                                    <th:block th:if="${null == vinyl}">
+                                        <img id="vinylCoverImage" src="/admin/dist/img/img-upload.png"
+                                             style="height: 64px;width: 64px;">
+                                    </th:block>
+                                    <th:block th:unless="${null == vinyl}">
+                                        <img id="vinylCoverImage" th:src="${vinyl.vinylCover}"
+                                             style="width:160px ;height: 120px;display:block;">
+                                    </th:block>
+                                </div>
+                                <div class="col" style="margin-top: 10px;">
+                                    <button class="btn btn-info" style="margin-bottom: 5px;" id="uploadVinylCoverImage">
+                                        <i class="fa fa-picture-o"></i>&nbsp;上传封面
+                                    </button>
+                                    <button class="btn btn-secondary" style="margin-bottom: 5px;" id="randomCoverImage">
+                                        <i class="fa fa-random"></i>&nbsp;随机封面
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- 按钮 -->
+                                &nbsp;<button class="btn btn-info float-right" style="margin-left: 5px;"
+                                              id="confirmVinylButton">保存唱片
+                            </button>&nbsp;
+                                &nbsp;<button class="btn btn-secondary float-right" style="margin-left: 5px;"
+                                              id="cancelVinylButton">返回唱片列表
+                            </button>&nbsp;
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="~{admin/footer::footer-fragment}"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/admin/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!-- Select2 -->
+<script th:src="@{/admin/plugins/select2/select2.full.min.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<!-- ajaxupload -->
+<script th:src="@{/admin/plugins/ajaxupload/ajaxupload.js}"></script>
+<script th:src="@{/admin/dist/js/public.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
+<script th:src="@{/admin/dist/js/vinyl-edit.js}"></script>
+</body>
+</html>

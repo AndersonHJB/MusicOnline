@@ -1,9 +1,10 @@
 package com.example.musiconline.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.musiconline.config.mybatis.mapper.BaseMapperPlus;
 import com.example.musiconline.domain.SysUser;
+import com.example.musiconline.domain.vo.SysUserVo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface SysUserMapper extends BaseMapper<SysUser> {
+public interface SysUserMapper extends BaseMapperPlus<SysUser, SysUserVo> {
 }

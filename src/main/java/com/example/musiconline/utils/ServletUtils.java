@@ -16,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -223,6 +224,17 @@ public class ServletUtils extends JakartaServletUtil {
      */
     public static String urlDecode(String str) {
         return URLDecoder.decode(str, StandardCharsets.UTF_8);
+    }
+
+
+    public static URI getHost(URI uri) {
+        URI effectiveURI = null;
+        try {
+            effectiveURI = new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(), uri.getPort(), null, null, null);
+        } catch (Throwable var4) {
+            effectiveURI = null;
+        }
+        return effectiveURI;
     }
 
 }

@@ -56,14 +56,14 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h3 th:text="${commentCount}">65</h3>
+                                <h3 th:text="${albumCount}">65</h3>
 
                                 <p>专辑列表</p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-comments"></i>
                             </div>
-                            <a th:href="@{/admin/comments}" class="small-box-footer">More info <i
+                            <a th:href="@{/page/album}" class="small-box-footer">More info <i
                                     class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -134,54 +134,7 @@
 <!-- AdminLTE App -->
 <script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
 <script th:src="@{/admin/dist/js/login.js}"></script>
-<script>
-    //打印token
-    const token = sessionStorage.getItem('token');
-    console.log(token)
-    // 如果token为空，则跳转到登录页面
-    if (!token) {
-        swal("请登录后访问", {
-            icon: "error",
-        }).then(() => {
-            // 用户关闭弹窗后执行跳转
-            window.location.href = '/page/login';
-        });
-    }
-
-    function logoutWithToken() {
-        // 获取 sessionStorage 中的 token
-        var token = sessionStorage.getItem('token');
-
-        if (token) {
-            // 创建一个 XMLHttpRequest 对象
-            var xhr = new XMLHttpRequest();
-
-            // 配置请求
-            xhr.open('POST', '/logout', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader('Authorization', token);
-
-            // 设置请求完成后的回调函数
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    // 退出成功，可以重定向到登录页面或其他页面
-                    // 清除sessionStorage中的token
-                    sessionStorage.removeItem('token');
-                    window.location.href = '/page/login';
-                } else {
-                    // 退出失败，可以显示错误信息
-                    alert('退出失败，请重试。');
-                }
-            };
-
-            // 发送请求
-            xhr.send(JSON.stringify({ token: token }));
-        } else {
-            // 如果没有 token，直接重定向到登录页面
-            window.location.href = '/page/login';
-        }
-    }
-</script>
 </body>
 </html>

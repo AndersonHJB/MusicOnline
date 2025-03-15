@@ -18,22 +18,18 @@ public class LoginBody {
     /**
      * 用户密码
      */
-    private String password;
-
-    /**
-     * 唯一标识
-     */
-    private String uuid;
+    private String userPassword;
+    
 
     /**
      * 手机号
      */
-    private String phoneNumber;
+    private String userPhone;
 
     /**
      * 邮箱
      */
-    private String email;
+    private String userEmail;
 
 
 }

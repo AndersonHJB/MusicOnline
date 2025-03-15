@@ -103,4 +103,11 @@ public class LoginHelper {
             return null;
         }
     }
+
+    public static boolean isAdmin() {
+        if (isLogin()) {
+            return getLoginUser().getUserRole() == 1;
+        }
+        return false;
+    }
 }

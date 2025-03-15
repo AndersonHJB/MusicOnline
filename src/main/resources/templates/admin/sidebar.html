@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <aside th:fragment="sidebar-fragment(path)" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a th:href="@{/admin/index}" class="brand-link">
+    <a th:href="@{/page/index}" class="brand-link">
         <img th:src="@{/admin/dist/img/logo.png}" alt="ssm-cluster Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">music online</span>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/page/blogs/edit}" th:class="${path}=='edit'?'nav-link active':'nav-link'">
+                    <a th:href="@{/page/vinyl/edit}" th:class="${path}=='vinyl-edit'?'nav-link active':'nav-link'">
                         <i class="nav-icon fa fa fa-pencil-square-o"></i>
                         <p>
                             发布唱片
@@ -43,45 +43,21 @@
                 </li>
                 <li class="nav-header">管理模块</li>
                 <li class="nav-item">
-                    <a th:href="@{/admin/blogs}" th:class="${path}=='blogs'?'nav-link active':'nav-link'">
+                    <a th:href="@{/page/vinyl}" th:class="${path}=='vinyl'?'nav-link active':'nav-link'">
                         <i class="fa fa-list-alt nav-icon" aria-hidden="true"></i>
                         <p>
                             唱片管理
                         </p>
                     </a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a th:href="@{/admin/comments}" th:class="${path}=='comments'?'nav-link active':'nav-link'">-->
-<!--                        <i class="fa fa-comments nav-icon" aria-hidden="true"></i>-->
-<!--                        <p>-->
-<!--                            评论管理-->
-<!--                        </p>-->
-<!--                    </a>-->
-<!--                </li>-->
                 <li class="nav-item">
-                    <a th:href="@{/admin/categories}" th:class="${path}=='categories'?'nav-link active':'nav-link'">
+                    <a th:href="@{/page/album}" th:class="${path}=='album'?'nav-link active':'nav-link'">
                         <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
                         <p>
                             专辑管理
                         </p>
                     </a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a th:href="@{/admin/tags}" th:class="${path}=='tags'?'nav-link active':'nav-link'">-->
-<!--                        <i class="fa fa-tags nav-icon" aria-hidden="true"></i>-->
-<!--                        <p>-->
-<!--                            标签管理-->
-<!--                        </p>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a th:href="@{/admin/links}" th:class="${path}=='links'?'nav-link active':'nav-link'">-->
-<!--                        <i class="fa fa-heart nav-icon" aria-hidden="true"></i>-->
-<!--                        <p>-->
-<!--                            友情链接-->
-<!--                        </p>-->
-<!--                    </a>-->
-<!--                </li>-->
                 <li class="nav-header">系统管理</li>
                 <li class="nav-item">
                     <a th:href="@{/page/user}"
@@ -91,10 +67,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/admin/profile}"
-                       th:class="${path}=='profile'?'nav-link active':'nav-link'">
+                    <a th:href="@{/page/user/info}"
+                       th:class="${path}=='info'?'nav-link active':'nav-link'">
                         <i class="fa fa-user-secret nav-icon"></i>
-                        <p>修改密码</p>
+                        <p>个人信息</p>
                     </a>
                 </li>
                 <li class="nav-item">

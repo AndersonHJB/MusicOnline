@@ -6,19 +6,20 @@
     <!--@Table sys_user-->
     <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_role" jdbcType="INTEGER" property="userRole" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
     <result column="del_flag" jdbcType="CHAR" property="delFlag" />
     <result column="create_by" jdbcType="BIGINT" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_by" jdbcType="BIGINT" property="updateBy" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="admin" jdbcType="INTEGER" property="admin" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    user_id, user_name, email, phone_number, `password`, del_flag, create_by, create_time, 
-    update_by, update_time, `admin`
+    user_id, user_name, user_email, user_phone, user_password, user_role, user_status,
+    del_flag, create_by, create_time, update_by, update_time
   </sql>
 </mapper>
