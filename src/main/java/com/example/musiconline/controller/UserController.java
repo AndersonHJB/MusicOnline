@@ -58,7 +58,6 @@ public class UserController {
     /**
      * 获取用户信息
      */
-    @Log(title = "获取用户信息", businessType = BusinessType.OTHER)
     @GetMapping("/info")
     public R<SysUserVo> getUserInfo() {
 
