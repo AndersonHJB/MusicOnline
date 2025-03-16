@@ -23,7 +23,7 @@ public interface SysUserService extends IService<SysUser> {
 
     void logout();
 
-    TableDataInfo<SysUser> getUserList(SysUserBo bo);
+    TableDataInfo<SysUserVo> getUserList(SysUserBo bo);
 
     SysUserVo getUserInfoById(String id);
 

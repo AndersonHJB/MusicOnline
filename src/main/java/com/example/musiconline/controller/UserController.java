@@ -3,7 +3,6 @@ package com.example.musiconline.controller;
 import com.example.musiconline.config.mybatis.page.TableDataInfo;
 import com.example.musiconline.config.satoken.utils.LoginHelper;
 import com.example.musiconline.domain.R;
-import com.example.musiconline.domain.SysUser;
 import com.example.musiconline.domain.bo.SysUserBo;
 import com.example.musiconline.domain.bo.UpdatePasswordBo;
 import com.example.musiconline.domain.vo.SysUserVo;
@@ -28,7 +27,7 @@ public class UserController {
      */
     @Log(title = "获取用户列表", businessType = BusinessType.OTHER)
     @PostMapping("/list")
-    public TableDataInfo<SysUser> getUserList(@RequestBody SysUserBo bo) {
+    public TableDataInfo<SysUserVo> getUserList(@RequestBody SysUserBo bo) {
 
         return sysUserService.getUserList(bo);
     }

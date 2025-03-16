@@ -104,16 +104,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public TableDataInfo<SysUser> getUserList(SysUserBo bo) {
+    public TableDataInfo<SysUserVo> getUserList(SysUserBo bo) {
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StringUtils.isNotEmpty(bo.getUserName()), SysUser::getUserName, bo.getUserName())
                 .like(StringUtils.isNotEmpty(bo.getUserEmail()), SysUser::getUserEmail, bo.getUserEmail())
                 .eq(ObjectUtils.isNotEmpty(bo.getUserRole()), SysUser::getUserRole, bo.getUserRole())
                 .eq(ObjectUtils.isNotEmpty(bo.getUserStatus()), SysUser::getUserStatus, bo.getUserStatus());
 
-        Page<SysUser> sysUserPage = sysUserMapper.selectPage(bo.build(), queryWrapper);
+        Page<SysUserVo> sysUserVoPage = sysUserMapper.selectVoPage(bo.build(), queryWrapper);
 
-        return TableDataInfo.build(sysUserPage);
+        return TableDataInfo.build(sysUserVoPage);
     }
 
     @Override
