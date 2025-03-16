@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 15/03/2025 21:12:59
+ Date: 16/03/2025 18:54:14
 */
 
 SET NAMES utf8mb4;
@@ -36,11 +36,35 @@ CREATE TABLE `album`  (
 -- ----------------------------
 -- Records of album
 -- ----------------------------
-INSERT INTO `album` VALUES (1, 'sdssss', 'http://localhost:8080/upload/20250315_12572480.jpg', '0', 1, '2025-03-15 01:25:07', 1, '2025-03-15 12:58:37');
-INSERT INTO `album` VALUES (2, 'sdsssssdds', 'http://localhost:8080/upload/20250315_12575184.jpg', '2', 1, '2025-03-15 12:57:54', 1, '2025-03-15 12:59:02');
-INSERT INTO `album` VALUES (3, 'rdsgfd', 'http://localhost:8080/upload/20250315_12584717.jpg', '2', 1, '2025-03-15 12:58:51', 1, '2025-03-15 12:58:51');
-INSERT INTO `album` VALUES (4, '4444', 'http://localhost:8080/upload/20250315_12590858.jpg', '2', 1, '2025-03-15 12:59:14', 1, '2025-03-15 12:59:14');
-INSERT INTO `album` VALUES (5, 'sd', '/admin/dist/img/rand/25.jpg', '0', 1, '2025-03-15 13:14:10', 1, '2025-03-15 13:14:10');
+
+-- ----------------------------
+-- Table structure for sys_oper_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_oper_log`;
+CREATE TABLE `sys_oper_log`  (
+  `oper_id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '模块标题',
+  `business_type` int NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+  `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '方法名称',
+  `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求方式',
+  `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作人员',
+  `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求URL',
+  `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '主机地址',
+  `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求参数',
+  `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '返回参数',
+  `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+  `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '错误消息',
+  `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
+  `cost_time` bigint NULL DEFAULT 0 COMMENT '消耗时间',
+  PRIMARY KEY (`oper_id`) USING BTREE,
+  INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
+  INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
+  INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 212 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_oper_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -60,16 +84,12 @@ CREATE TABLE `sys_user`  (
   `update_by` bigint NULL DEFAULT NULL COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '123@163.com', '15888888885', 'admin_002', 1, 1, '0', 1, '2024-06-24 15:31:32', 1, '2025-03-15 20:49:30');
-INSERT INTO `sys_user` VALUES (2, 'music1', '123@qq.com', '15666666666', 'music', 0, 1, '0', 1, '2024-06-24 15:31:32', 1, '2025-03-15 11:07:45');
-INSERT INTO `sys_user` VALUES (3, 'music2', '123@qq.com', '15666666666', 'music2', 0, 1, '0', 1, '2025-03-14 22:35:13', 1, '2025-03-14 22:35:41');
-INSERT INTO `sys_user` VALUES (4, 'sentinel', '123@qq.com', '15666666666', 'sentinel_musicOnline', 0, 1, '0', 1, '2025-03-14 22:35:13', 1, '2025-03-15 01:35:18');
-INSERT INTO `sys_user` VALUES (5, 'admin2', '123@qq.com', '15666666666', 'admin2_musicOnline', 1, 1, '0', 1, '2025-03-14 22:51:11', 1, '2025-03-14 22:51:11');
+INSERT INTO `sys_user` VALUES (1, 'admin', '123@163.com', '15888888885', 'admin', 1, 1, '0', 1, '2024-06-24 15:31:32', 1, '2025-03-15 20:49:30');
 
 -- ----------------------------
 -- Table structure for vinyl
@@ -90,14 +110,10 @@ CREATE TABLE `vinyl`  (
   `update_by` bigint NULL DEFAULT NULL COMMENT '修改者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vinyl
 -- ----------------------------
-INSERT INTO `vinyl` VALUES (1, '123', '2', 'http://localhost:8080/upload/20250315_12572480.jpg', '1', 1, '2025-03-15', 23.00, '2', NULL, NULL, 1, '2025-03-15 19:07:02');
-INSERT INTO `vinyl` VALUES (2, '14', '14', 'http://localhost:8080/admin/dist/img/rand/27.jpg', '14', 5, NULL, 123.00, '2', 1, '2025-03-15 18:37:50', 1, '2025-03-15 18:37:50');
-INSERT INTO `vinyl` VALUES (3, 'jkk', '14', 'http://localhost:8080/admin/dist/img/rand/22.jpg', '14', 5, '2025-03-15', 12.00, '2', 1, '2025-03-15 19:10:02', 1, '2025-03-15 19:16:31');
-INSERT INTO `vinyl` VALUES (4, '12', '2', 'http://localhost:8080/admin/dist/img/rand/19.jpg', '14', 5, '2025-03-15', 12.00, '0', 1, '2025-03-15 19:17:30', 1, '2025-03-15 19:18:05');
 
 SET FOREIGN_KEY_CHECKS = 1;
