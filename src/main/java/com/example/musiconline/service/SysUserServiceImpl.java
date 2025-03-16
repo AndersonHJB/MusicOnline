@@ -55,9 +55,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 保存用户
         SysUser sysUser = new SysUser();
         sysUser.setUserName(bo.getUserName());
-        sysUser.setUserPassword(bo.getUserName() + "_" + passwordSuffix);
+        sysUser.setUserPassword(bo.getUserPassword());
         sysUser.setUserEmail(bo.getUserEmail());
         sysUser.setUserPhone(bo.getUserPhone());
+        sysUser.setUserStatus(1);
         sysUserMapper.insert(sysUser);
     }
 

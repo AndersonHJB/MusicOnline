@@ -35,6 +35,14 @@ public class PageController {
         return "admin/login";
     }
 
+    /**
+     * 注册页面
+     */
+    @GetMapping("/page/register")
+    public String register() {
+        return "admin/register";
+    }
+
     @GetMapping("/page/blogs/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");

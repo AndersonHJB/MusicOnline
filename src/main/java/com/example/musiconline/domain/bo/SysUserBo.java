@@ -24,4 +24,6 @@ public class SysUserBo extends PageQuery {
 
     private Integer userStatus;
 
+    private String userPassword;
+
 }

@@ -51,13 +51,13 @@ function isURL(str_url) {
 }
 
 /**
- * 用户名称验证 4到16位（字母，数字，下划线，减号）
+ * 用户名称验证 3到16位（字母，数字，下划线，减号）
  *
  * @param userName
  * @returns {boolean}
  */
 function validUserName(userName) {
-    var pattern = /^[a-zA-Z0-9_-]{4,16}$/;
+    var pattern = /^[a-zA-Z0-9_-]{3,16}$/;
     if (pattern.test(userName.trim())) {
         return (true);
     } else {

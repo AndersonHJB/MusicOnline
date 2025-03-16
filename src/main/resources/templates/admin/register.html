@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Music Online | Register</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" th:href="@{/admin/dist/img/favicon.png}"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/admin/dist/css/font-awesome.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" th:href="@{/admin/dist/css/ionicons.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+  <style>
+    canvas {
+      display: block;
+      vertical-align: bottom;
+    }
+    #particles {
+      background-color: #F7FAFC;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* 防止内容溢出 */
+    }
+    .register-box {
+      z-index: 1;
+      margin-top: 30px; /* 调整这个值以达到你想要的效果 */
+    }
+    .form-group {
+      margin-bottom: 5px; /* 修改间隔 */
+    }
+  </style>
+</head>
+<body class="hold-transition register-page">
+<div id="particles">
+</div>
+<div class="register-box">
+  <div class="register-logo" style="color: #007bff;">
+    <h1>music online</h1>
+  </div>
+  <!-- /.register-logo -->
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Register</p>
+      <form id="registerForm">
+        <div th:if="${not #strings.isEmpty(session.errorMsg)}" class="form-group">
+          <div class="alert alert-danger" th:text="${session.errorMsg}"></div>
+        </div>
+        <div class="form-group has-feedback">
+          <span class="fa fa-user form-control-feedback"></span>
+          <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入用户名"
+                 required="true">
+        </div>
+        <div class="form-group has-feedback">
+          <span class="fa fa-envelope form-control-feedback"></span>
+          <input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="请输入邮箱"
+                 required="true">
+        </div>
+        <div class="form-group has-feedback">
+          <span class="fa fa-phone form-control-feedback"></span>
+          <input type="text" id="userPhone" name="userPhone" class="form-control" placeholder="请输入手机号"
+                 required="true">
+        </div>
+        <div class="form-group has-feedback">
+          <span class="fa fa-lock form-control-feedback"></span>
+          <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="请输入密码"
+                 required="true">
+        </div>
+        <div class="form-group has-feedback">
+          <span class="fa fa-lock form-control-feedback"></span>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="确认密码"
+                 required="true">
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <button type="button" id="backToLoginButton" class="btn btn-default btn-block btn-flat">返回登录</button>
+          </div>
+          <div class="col-4">
+            <button type="button" id="registerButton" class="btn btn-primary btn-block btn-flat">注册</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.register-card-body -->
+  </div>
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/admin/dist/js/plugins/particles.js}"></script>
+<script th:src="@{/admin/dist/js/plugins/login-bg-particles.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/public.js}"></script>
+<script th:src="@{/admin/dist/js/register.js}"></script>
+</body>
+</html>
