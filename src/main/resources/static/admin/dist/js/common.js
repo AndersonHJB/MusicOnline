@@ -1,7 +1,7 @@
 // 获取 token 的方法
 function getTokenFromSession() {
-    // 这里假设 token 存储在 sessionStorage 中
-    return sessionStorage.getItem('token');
+    // 这里假设 token 存储在 localStorage 中
+    return localStorage.getItem('token');
 }
 
 // 设置全局 ajax 请求头
@@ -15,12 +15,12 @@ $.ajaxSetup({
 
 // 检查token是否过期
 function isTokenExpired() {
-    var tokenExpiration = sessionStorage.getItem('tokenExpiration');
+    var tokenExpiration = localStorage.getItem('tokenExpiration');
     if (tokenExpiration) {
         var currentTime = new Date().getTime();
         if (currentTime > tokenExpiration) {
-            sessionStorage.removeItem('token');
-            sessionStorage.removeItem('tokenExpiration');
+            localStorage.removeItem('token');
+            localStorage.removeItem('tokenExpiration');
             return true;
         }
     }
@@ -66,8 +66,8 @@ function logoutWithToken() {
             url: '/logout',
             success: function () {
                 // 退出成功，可以重定向到登录页面或其他页面
-                // 清除sessionStorage中的token
-                sessionStorage.removeItem('token');
+                // 清除localStorage中的token
+                localStorage.removeItem('token');
                 window.location.href = '/page/login';
             },
             error: function () {

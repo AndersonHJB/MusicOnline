@@ -22,11 +22,11 @@ $('#loginButton').click(function () {
             success: function (result) {
                 console.log(result);
                 if (result.code === 200) {
-                    // 保存token到session，5 分钟
+                    // 保存token到localStorage，5 分钟
                     var token = 'Bearer ' + result.data.access_token;
                     var expirationTime = new Date().getTime() + 5 * 60 * 1000; // 5 分钟后的时间戳
-                    sessionStorage.setItem('token', token);
-                    sessionStorage.setItem('tokenExpiration', expirationTime);
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('tokenExpiration', expirationTime);
                     window.location.href = '/page/index';
                 } else {
                     swal(result.msg, {
@@ -40,3 +40,37 @@ $('#loginButton').click(function () {
     }
 });
 
+function getTokenFromSession() {
+    // 这里假设 token 存储在 localStorage 中
+    return localStorage.getItem('token');
+}
+
+
+// 检查token是否过期
+function isTokenExpired() {
+    var tokenExpiration = localStorage.getItem('tokenExpiration');
+    if (tokenExpiration) {
+        var currentTime = new Date().getTime();
+        if (currentTime > tokenExpiration) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('tokenExpiration');
+            return true;
+        }
+    }
+    return false;
+}
+
+// 在需要使用token的地方调用isTokenExpired函数进行检查
+// 例如，在页面加载时检查token是否过期
+$(document).ready(function () {
+    if (isTokenExpired()) {
+        swal("登录已过期，请重新登录", {
+            icon: "warning",
+        }).then(() => {
+            // 用户关闭弹窗后执行跳转
+            window.location.href = '/page/login';
+        });
+    }else if(getTokenFromSession()){
+        window.location.href = '/page/index';
+    }
+});

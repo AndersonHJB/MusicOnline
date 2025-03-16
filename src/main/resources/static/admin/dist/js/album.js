@@ -65,8 +65,8 @@ $(function () {
 
     // 获取 token 的方法
     function getTokenFromSession() {
-        // 这里假设 token 存储在 sessionStorage 中
-        var token = sessionStorage.getItem('token');
+        // 这里假设 token 存储在 localStorage 中
+        var token = localStorage.getItem('token');
         console.log("获取到的 token：" + token);
         return token;
     }
