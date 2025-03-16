@@ -37,6 +37,26 @@ $(document).ready(function () {
             // 用户关闭弹窗后执行跳转
             window.location.href = '/page/login';
         });
+    }else {
+        // 页面加载时获取用户信息
+        $.ajax({
+            type: "GET",
+            url: "/user/info", // 假设这是获取用户信息的接口
+            success: function (data) {
+                //设置用户角色，用于判断是否为管理员
+                localStorage.setItem('role', data.data.userRole);
+                if (data.data.userRole === 1) {
+                    $('#userManagementItem').show();
+                } else {
+                    $('#userManagementItem').hide();
+                }
+            },
+            error: function () {
+                swal("获取用户信息失败", {
+                    icon: "error",
+                });
+            }
+        });
     }
 });
 
