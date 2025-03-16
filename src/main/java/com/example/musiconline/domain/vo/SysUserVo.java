@@ -7,8 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author lds
- * @date 2025/3/14
+ * 用户对象
  */
 @Data
 @AutoMapper(target = SysUser.class)

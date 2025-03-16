@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{admin/header::header-fragment}"></header>
+<body class="hold-transition sidebar-mini">
+<style>
+  .ui-jqgrid tr.jqgrow td {
+    white-space: normal !important;
+    height: auto;
+    vertical-align: text-top;
+    padding-top: 2px;
+  }
+  .clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+  }
+  #logDetailContent {
+    max-height: 400px; /* 设置最大高度 */
+    overflow-y: auto; /* 允许垂直滚动 */
+  }
+</style>
+
+<div class="wrapper">
+  <div th:replace="~{admin/header::header-nav}"></div>
+  <div th:replace="~{admin/sidebar::sidebar-fragment(${path})}"></div>
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid"></div>
+    </div>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">操作日志查询</h3>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6 position-relative">
+                <label for="searchKeyword">关键字:</label>
+                <input type="text" class="form-control" id="searchKeyword" placeholder="请输入关键字">
+                <i class="fa fa-times clear-icon" id="clearSearchKeyword"></i>
+              </div>
+            </div>
+            <div class="grid-btn">
+              <button class="btn btn-primary" onclick="searchLogs()"><i class="fa fa-search"></i> 查询</button>
+              <button class="btn btn-secondary" onclick="resetSearchForm()"><i class="fa fa-refresh"></i> 重置</button>
+              <button class="btn btn-danger" onclick="clearLogs()"><i class="fa fa-trash-o"></i> 清空日志</button>
+            </div>
+            <table id="logGrid" class="table table-bordered"></table>
+            <div id="logGridPager"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="~{admin/footer::footer-fragment}"></div>
+</div>
+
+<!-- 日志详情 Modal -->
+<div class="modal fade" id="logDetailModal" tabindex="-1" role="dialog" aria-labelledby="logDetailModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logDetailModalLabel">日志详情</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre id="logDetailContent" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 必要的 JS 资源 -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/admin/plugins/jqgrid-5.7.0/jquery.jqGrid.min.js}"></script>
+<script th:src="@{/admin/plugins/jqgrid-5.7.0/grid.locale-cn.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/common.js}"></script>
+<script th:src="@{/admin/dist/js/log.js}"></script>
+</body>
+</html>

@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 
 /**
- * @author lds
- * @date 2025/3/11
+ * 自定义特殊异常类
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

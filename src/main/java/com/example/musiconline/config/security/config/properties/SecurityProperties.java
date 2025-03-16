@@ -4,8 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author lds
- * @date 2025/3/11
+ * Security配置属性
  */
 @Data
 @ConfigurationProperties(prefix = "security")

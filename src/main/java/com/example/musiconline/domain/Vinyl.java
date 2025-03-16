@@ -10,9 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- *
- * @author lds
- * @date 2025/3/15
+ * 黑胶唱片表
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

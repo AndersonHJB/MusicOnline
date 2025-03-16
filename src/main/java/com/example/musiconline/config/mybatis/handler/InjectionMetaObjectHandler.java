@@ -14,8 +14,6 @@ import java.util.Date;
 
 /**
  * MP注入处理器
- *
- * @author ll
  */
 @Slf4j
 public class InjectionMetaObjectHandler implements MetaObjectHandler {

@@ -7,13 +7,14 @@ import com.example.musiconline.domain.SysUser;
 import com.example.musiconline.domain.bo.SysUserBo;
 import com.example.musiconline.domain.bo.UpdatePasswordBo;
 import com.example.musiconline.domain.vo.SysUserVo;
-import com.example.musiconline.service.impl.SysUserService;
+import com.example.musiconline.log.annotation.Log;
+import com.example.musiconline.log.enums.BusinessType;
+import com.example.musiconline.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author lds
- * @date 2025/3/14
+ * 用户管理
  */
 @RestController
 @RequestMapping("/user")
@@ -25,6 +26,7 @@ public class UserController {
     /**
      * 获取用户列表
      */
+    @Log(title = "获取用户列表", businessType = BusinessType.OTHER)
     @PostMapping("/list")
     public TableDataInfo<SysUser> getUserList(@RequestBody SysUserBo bo) {
 
@@ -34,6 +36,7 @@ public class UserController {
     /**
      * 获取用户信息
      */
+    @Log(title = "获取用户信息", businessType = BusinessType.OTHER)
     @PostMapping("/info/{id}")
     public R<SysUserVo> getUserInfoById(@PathVariable String id) {
 
@@ -43,6 +46,7 @@ public class UserController {
     /**
      * 用户信息更新
      */
+    @Log(title = "用户信息更新", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     public R<Void> updateUser(@RequestBody SysUserBo bo) {
 
@@ -54,6 +58,7 @@ public class UserController {
     /**
      * 获取用户信息
      */
+    @Log(title = "获取用户信息", businessType = BusinessType.OTHER)
     @GetMapping("/info")
     public R<SysUserVo> getUserInfo() {
 
@@ -63,6 +68,7 @@ public class UserController {
     /**
      * 修改密码
      */
+    @Log(title = "修改密码", businessType = BusinessType.UPDATE)
     @PostMapping("/updatePassword")
     public R<Void> updatePassword(@RequestBody UpdatePasswordBo bo) {
 

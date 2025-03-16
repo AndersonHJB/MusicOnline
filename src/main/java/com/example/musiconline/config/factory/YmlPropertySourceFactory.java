@@ -11,8 +11,6 @@ import java.io.IOException;
 
 /**
  * yml 配置源工厂
- *
- * @author ll
  */
 public class YmlPropertySourceFactory extends DefaultPropertySourceFactory {
 

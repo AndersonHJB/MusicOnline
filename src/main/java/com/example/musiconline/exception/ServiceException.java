@@ -9,8 +9,6 @@ import java.io.Serial;
 
 /**
  * 业务异常
- *
- * @author ll
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

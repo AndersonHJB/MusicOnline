@@ -9,9 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- *
- * @author lds
- * @date 2025/3/15
+ *  vinyl 数据层
  */
 @Mapper
 public interface VinylMapper extends BaseMapperPlus<Vinyl, VinylVo> {

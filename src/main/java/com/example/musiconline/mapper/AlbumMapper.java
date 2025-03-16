@@ -9,9 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- *
- * @author lds
- * @date 2025/3/15
+ * 专辑表 Mapper 接口
  */
 @Mapper
 public interface AlbumMapper extends BaseMapperPlus<Album, AlbumVo> {

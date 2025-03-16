@@ -47,8 +47,10 @@ $(document).ready(function () {
                 localStorage.setItem('role', data.data.userRole);
                 if (data.data.userRole === 1) {
                     $('#userManagementItem').show();
+                    $('#logManagementItem').show();
                 } else {
                     $('#userManagementItem').hide();
+                    $('#logManagementItem').hide();
                 }
             },
             error: function () {

@@ -7,8 +7,6 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * spring工具类
- *
- * @author ll
  */
 public final class SpringUtils extends SpringUtil {
 

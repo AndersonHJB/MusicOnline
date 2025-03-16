@@ -4,7 +4,9 @@ import com.example.musiconline.config.mybatis.page.TableDataInfo;
 import com.example.musiconline.domain.R;
 import com.example.musiconline.domain.bo.VinylBo;
 import com.example.musiconline.domain.vo.VinylVo;
-import com.example.musiconline.service.impl.VinylService;
+import com.example.musiconline.log.annotation.Log;
+import com.example.musiconline.log.enums.BusinessType;
+import com.example.musiconline.service.VinylService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 唱片管理
  */
 @RestController
 @RequestMapping("/vinyl")
@@ -27,6 +28,7 @@ public class VinylController {
     /**
      * 获取唱片列表
      */
+    @Log(title = "唱片管理列表", businessType = BusinessType.OTHER)
     @PostMapping("/list")
     public TableDataInfo<VinylVo> getVinylList(@RequestBody VinylBo bo) {
 
@@ -37,6 +39,7 @@ public class VinylController {
     /**
      * 新增唱片
      */
+    @Log(title = "唱片管理", businessType = BusinessType.INSERT)
     @PostMapping("/save")
     public R<Void> saveVinyl(@RequestBody VinylBo bo) {
 
@@ -47,6 +50,7 @@ public class VinylController {
     /**
      * 修改唱片
      */
+    @Log(title = "唱片管理", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     public R<Void> updateVinyl(@RequestBody VinylBo bo) {
 
@@ -57,6 +61,7 @@ public class VinylController {
     /**
      * 删除唱片
      */
+    @Log(title = "唱片管理", businessType = BusinessType.DELETE)
     @PostMapping("/delete")
     public R<Void> deleteVinyl(@RequestBody List<Long> ids) {
 

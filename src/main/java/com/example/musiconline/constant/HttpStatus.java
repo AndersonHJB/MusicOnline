@@ -2,8 +2,6 @@ package com.example.musiconline.constant;
 
 /**
  * 返回状态码
- *
- * @author ll
  */
 public interface HttpStatus {
     /**

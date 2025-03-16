@@ -24,11 +24,6 @@ import java.util.stream.Collectors;
 
 /**
  * 自定义 Mapper 接口, 实现 自定义扩展
- *
- * @param <T> table 泛型
- * @param <V> vo 泛型
- * @author ll
- * @since 2021-05-13
  */
 @SuppressWarnings("unchecked")
 public interface BaseMapperPlus<T, V> extends BaseMapper<T> {

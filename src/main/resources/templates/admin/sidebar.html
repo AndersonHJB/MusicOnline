@@ -66,6 +66,13 @@
                         <p>用户管理</p>
                     </a>
                 </li>
+                <li class="nav-item" id="logManagementItem">
+                    <a th:href="@{/page/log}"
+                       th:class="${path}=='log'?'nav-link active':'nav-link'">
+                        <i class="fa fa-user-secret nav-icon"></i>
+                        <p>操作日志</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a th:href="@{/page/user/info}"
                        th:class="${path}=='info'?'nav-link active':'nav-link'">

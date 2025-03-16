@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 配置文件上传路径
+ */
 @Configuration
 public class MusicOnlineWebMvcConfigurer implements WebMvcConfigurer {
 

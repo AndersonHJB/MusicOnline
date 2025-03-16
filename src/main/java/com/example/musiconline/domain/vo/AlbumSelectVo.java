@@ -3,8 +3,7 @@ package com.example.musiconline.domain.vo;
 import lombok.Data;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 专辑下拉框
  */
 @Data
 public class AlbumSelectVo {

@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author lds
- * @date 2025/3/14
+ * 用户查询对象
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

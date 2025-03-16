@@ -7,8 +7,7 @@ import lombok.EqualsAndHashCode;
 import java.util.Date;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 专辑业务对象
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

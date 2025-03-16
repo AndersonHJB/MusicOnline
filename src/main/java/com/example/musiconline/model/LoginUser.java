@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 /**
  * 用户信息
- *
- * @author ll
  */
 @Data
 @NoArgsConstructor

@@ -7,8 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 专辑视图对象 album
  */
 @Data
 @AutoMapper(target = Album.class)

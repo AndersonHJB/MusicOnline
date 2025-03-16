@@ -64,6 +64,7 @@ spring:
   thymeleaf:
     cache: false
   jackson:
+    time-zone: Asia/Shanghai
     # 日期格式化
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
@@ -104,19 +105,9 @@ spring:
         master:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3308/musicOnline?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://127.0.0.1:3308/musicOnline?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
           username: root
           password: root
-  # redis通用配置 子服务可以自行配置进行覆盖
-#  data:
-#    redis:
-#      host: localhost
-#      port: 6379
-#      # 密码(如没有密码请注释掉)
-#      # password:
-#      database: 0
-#      timeout: 10s
-#      ssl.enabled: false
 
 
 # MyBatisPlus配置
@@ -160,28 +151,6 @@ mybatis-plus:
       whereStrategy: NOT_NULL
 
 
-# redisson 配置
-#redisson:
-#  # redis key前缀
-#  keyPrefix:
-#  # 线程池数量
-#  threads: 4
-#  # Netty线程池数量
-#  nettyThreads: 8
-#  # 单节点配置
-#  singleServerConfig:
-#    # 客户端名称
-#    clientName: musicOnline
-#    # 最小空闲连接数
-#    connectionMinimumIdleSize: 8
-#    # 连接池大小
-#    connectionPoolSize: 32
-#    # 连接空闲超时，单位：毫秒
-#    idleConnectionTimeout: 10000
-#    # 命令等待超时，单位：毫秒
-#    timeout: 3000
-#    # 发布和订阅连接池大小
-#    subscriptionConnectionPoolSize: 50
 
 # Sa-Token配置
 sa-token:

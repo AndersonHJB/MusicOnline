@@ -8,8 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 黑胶唱片视图对象
  */
 @Data
 @AutoMapper(target = Vinyl.class)

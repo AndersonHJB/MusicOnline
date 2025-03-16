@@ -9,8 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 黑胶唱片业务对象
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

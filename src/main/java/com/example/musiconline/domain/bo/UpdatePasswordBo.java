@@ -3,8 +3,7 @@ package com.example.musiconline.domain.bo;
 import lombok.Data;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 修改密码的BO
  */
 @Data
 public class UpdatePasswordBo {

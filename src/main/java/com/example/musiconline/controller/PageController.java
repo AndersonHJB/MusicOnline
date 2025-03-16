@@ -1,9 +1,8 @@
 package com.example.musiconline.controller;
 
-import com.example.musiconline.config.satoken.utils.LoginHelper;
 import com.example.musiconline.domain.Vinyl;
-import com.example.musiconline.service.impl.AlbumService;
-import com.example.musiconline.service.impl.VinylService;
+import com.example.musiconline.service.AlbumService;
+import com.example.musiconline.service.VinylService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * @author lds
- * @date 2025/3/10
+ * 页面跳转
  */
 @Controller
 @RequiredArgsConstructor
@@ -106,5 +104,14 @@ public class PageController {
     public String userInfo(HttpServletRequest request) {
         request.setAttribute("path", "info");
         return "admin/info";
+    }
+
+    /**
+     * 操作日志页面
+     */
+    @GetMapping("/page/log")
+    public String log(HttpServletRequest request) {
+        request.setAttribute("path", "log");
+        return "admin/log";
     }
 }

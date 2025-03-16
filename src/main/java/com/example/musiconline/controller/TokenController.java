@@ -4,8 +4,10 @@ package com.example.musiconline.controller;
 import com.example.musiconline.domain.R;
 import com.example.musiconline.domain.bo.SysUserBo;
 import com.example.musiconline.domain.vo.LoginVo;
+import com.example.musiconline.log.annotation.Log;
+import com.example.musiconline.log.enums.BusinessType;
 import com.example.musiconline.model.LoginBody;
-import com.example.musiconline.service.impl.SysUserService;
+import com.example.musiconline.service.SysUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +42,9 @@ public class TokenController {
 
 
     /**
-     * 登出方法
+     * 退出登录
      */
+    @Log(title = "退出登录", businessType = BusinessType.FORCE)
     @PostMapping("logout")
     public R<Void> logout(HttpServletRequest request) {
         sysUserService.logout();
@@ -53,6 +56,7 @@ public class TokenController {
     /**
      * 用户注册
      */
+    @Log(title = "用户注册", businessType = BusinessType.INSERT)
     @PostMapping("register")
     public R<Void> register(@RequestBody SysUserBo bo) {
         // 用户注册

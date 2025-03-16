@@ -25,8 +25,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 /**
  * 全局异常处理器
- *
- * @author ll
  */
 @Slf4j
 @RestControllerAdvice

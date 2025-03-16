@@ -1,6 +1,8 @@
 package com.example.musiconline.controller;
 
 import com.example.musiconline.domain.R;
+import com.example.musiconline.log.annotation.Log;
+import com.example.musiconline.log.enums.BusinessType;
 import com.example.musiconline.utils.ServletUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,7 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * @author lds
- * @date 2025/3/15
+ * 通用请求处理
  */
 @RestController
 @RequestMapping("/common")
@@ -28,6 +29,10 @@ public class CommonController {
     @Value("${file.upload.dic}")
     private String fileUploadDic;
 
+    /**
+     * 文件上传
+     */
+    @Log(title = "文件上传", businessType = BusinessType.OTHER)
     @PostMapping({"/upload/file"})
     public R<?> upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws URISyntaxException {
         String fileName = file.getOriginalFilename();
