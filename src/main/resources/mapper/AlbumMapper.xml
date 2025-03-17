@@ -21,5 +21,8 @@
   <select id="selectAlbumSelect" resultType="com.example.musiconline.domain.vo.AlbumSelectVo">
     select id, album_name from album
     where del_flag = 0
+    <if test="userId != null">
+      and create_by = #{userId}
+    </if>
   </select>
 </mapper>

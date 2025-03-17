@@ -21,4 +21,6 @@ public interface VinylService extends IService<Vinyl> {
     void saveVinyl(VinylBo bo);
 
     void updateVinyl(VinylBo bo);
+
+    TableDataInfo<VinylVo> getVinylSelect(VinylBo bo);
 }

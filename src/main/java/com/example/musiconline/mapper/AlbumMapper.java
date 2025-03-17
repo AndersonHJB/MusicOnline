@@ -5,6 +5,7 @@ import com.example.musiconline.domain.Album;
 import com.example.musiconline.domain.vo.AlbumSelectVo;
 import com.example.musiconline.domain.vo.AlbumVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ import java.util.List;
  */
 @Mapper
 public interface AlbumMapper extends BaseMapperPlus<Album, AlbumVo> {
-    List<AlbumSelectVo> selectAlbumSelect();
+    List<AlbumSelectVo> selectAlbumSelect(@Param("userId") Long userId);
 }

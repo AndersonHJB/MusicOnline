@@ -30,6 +30,6 @@ $(function () {
 
     // 返回唱片列表按钮点击事件
     $('#backToListButton').click(function () {
-        window.location.href = '/page/vinyl';
+        window.history.back();
     });
 });

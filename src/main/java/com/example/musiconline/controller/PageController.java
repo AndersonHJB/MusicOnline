@@ -81,7 +81,6 @@ public class PageController {
             Vinyl vinyl = vinylService.getById(id);
             request.setAttribute("vinyl", vinyl);
         }
-        request.setAttribute("albums", albumService.getAlbumSelect());
         request.setAttribute("path", "vinyl-edit");
         return "admin/vinyl-edit";
     }
@@ -93,7 +92,7 @@ public class PageController {
     public String vinylDetail(HttpServletRequest request, @PathVariable Long id) {
         Vinyl vinyl = vinylService.getById(id);
         request.setAttribute("vinyl", vinyl);
-        request.setAttribute("albums", albumService.getAlbumSelect());
+        request.setAttribute("albums", albumService.getAllAlbumSelect());
         return "admin/vinyl-detail";
     }
 

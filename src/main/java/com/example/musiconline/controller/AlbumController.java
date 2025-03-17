@@ -84,4 +84,14 @@ public class AlbumController {
         return R.ok(list);
     }
 
+    /**
+     * 获取全部专辑下拉框
+     */
+    @Log(title = "获取全部专辑下拉框", businessType = BusinessType.OTHER)
+    @GetMapping("/allSelect")
+    public R<List<AlbumSelectVo>> getAllAlbumSelect() {
+        List<AlbumSelectVo> list = albumService.getAllAlbumSelect();
+        return R.ok(list);
+    }
+
 }

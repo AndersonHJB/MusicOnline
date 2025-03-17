@@ -25,4 +25,6 @@ public interface AlbumService extends IService<Album> {
     AlbumVo getAlbumInfoById(Long id);
 
     List<AlbumSelectVo> getAlbumSelect();
+
+    List<AlbumSelectVo> getAllAlbumSelect();
 }

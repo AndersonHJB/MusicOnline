@@ -60,17 +60,9 @@
 
                                 <label for="albumId" class="col-auto col-form-label" style="margin-right: 10px;">专辑名称:</label>
                                 <div class="col" style="flex: 1;">
+                                    <input type="hidden" id="selectedAlbumId" th:value="${vinyl!=null and vinyl.albumId!=null }?${vinyl.albumId}: ''" />
                                     <select class="form-control select2" style="width: 100%;" id="albumId" data-placeholder="请选择专辑..." data-allow-clear="true">
-                                        <th:block th:if="${null == albums}">
-                                            <option value="" selected="selected">默认专辑</option>
-                                        </th:block>
-                                        <th:block th:unless="${null == albums}">
-                                            <option value="">请选择专辑...</option> <!-- 这里是默认空值 -->
-                                            <th:block th:each="a : ${albums}">
-                                                <option th:value="${a.id}" th:text="${a.albumName}"
-                                                        th:selected="${vinyl != null and vinyl.albumId != null and vinyl.albumId == a.id}"></option>
-                                            </th:block>
-                                        </th:block>
+                                        <option value="">请选择专辑...</option> <!-- 这里是默认空值 -->
                                     </select>
                                 </div>
                             </div>

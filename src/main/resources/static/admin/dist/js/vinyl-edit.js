@@ -143,29 +143,40 @@ $(function () {
         window.location.href = "/page/vinyl";
     });
 
-    // Pre-fill form if editing an existing vinyl
-    var vinylId = new URLSearchParams(window.location.search).get('id');
-    if (vinylId) {
+
+
+    $(document).ready(function(){
+        // 获取隐藏域中的selectedAlbumId值，并将其转换为字符串
+        var selectedAlbumId = $('#selectedAlbumId').val();
+
+        // 获取专辑数据并填充到下拉框
         $.ajax({
-            url: '/vinyl/get/' + vinylId,
+            url: '/album/select',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('#vinylForm').find('input[name="id"]').val(data.id);
-                $('#singleName').val(data.singleName);
-                $('#vinylTitle').val(data.vinylTitle);
-                $('#artist').val(data.artist);
-                $('#albumId').val(data.albumId).trigger('change');
-                $('#issueDate').val(data.issueDate.split('T')[0]);
-                $('#price').val(data.price);
-                $('#coverPreview').attr('src', data.vinylCover).show();
-                $('#vinylCover').siblings('.custom-file-label').text(data.vinylCover.split('/').pop());
+                var select = $('#albumId');
+                data.data.forEach(function (album) {
+                    // 创建option元素
+                    var option = $('<option>', {
+                        value: album.id,
+                        text: album.albumName
+                    }).appendTo(select); // 添加到select元素
+
+                    // 检查是否需要选中此项，注意这里将两边都转换为字符串进行比较
+                    if (String(album.id) === String(selectedAlbumId)) {
+                        option.prop('selected', true); // 设置为选中状态
+                    }
+                });
+
+                // 如果使用了select2插件，记得初始化
+                $('#albumId').select2();
             },
             error: function (xhr, status, error) {
-                console.error('Error fetching vinyl data:', error);
+                console.error('Error fetching album data:', error);
             }
         });
-    }
+    });
 
 });
 

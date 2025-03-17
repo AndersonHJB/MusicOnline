@@ -3,9 +3,11 @@ package com.example.musiconline.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.musiconline.config.mybatis.page.TableDataInfo;
+import com.example.musiconline.config.satoken.utils.LoginHelper;
 import com.example.musiconline.domain.SysOperLog;
 import com.example.musiconline.domain.bo.SysOperLogBo;
 import com.example.musiconline.domain.vo.SysOperLogVo;
+import com.example.musiconline.exception.ServiceException;
 import com.example.musiconline.log.event.OperLogEvent;
 import com.example.musiconline.mapper.SysOperLogMapper;
 import com.example.musiconline.service.OperLogService;
@@ -31,6 +33,10 @@ public class OperLogServiceImpl implements OperLogService {
 
     @Override
     public TableDataInfo<SysOperLogVo> getLogList(SysOperLogBo bo) {
+        // 查看是否有权限
+        if (!LoginHelper.isAdmin()){
+            throw new ServiceException("没有权限查看操作日志");
+        }
         LambdaQueryWrapper<SysOperLog> queryWrapper = new LambdaQueryWrapper<>();
         //关键字全字段模糊查询
         String keyword = bo.getKeyword();
@@ -53,6 +59,10 @@ public class OperLogServiceImpl implements OperLogService {
     @Override
     public void cleanLog() {
 
+        // 权限校验
+        if (!LoginHelper.isAdmin()){
+            throw new ServiceException("没有权限清空操作日志");
+        }
         sysOperLogMapper.delete(null);
     }
 }
