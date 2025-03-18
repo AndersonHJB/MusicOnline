@@ -24,7 +24,7 @@ $('#loginButton').click(function () {
                 if (result.code === 200) {
                     // 保存token到localStorage，5 分钟
                     var token = 'Bearer ' + result.data.access_token;
-                    var expirationTime = new Date().getTime() + 5 * 60 * 1000; // 5 分钟后的时间戳
+                    var expirationTime = new Date().getTime() + 23 * 60 * 60 * 1000; // 23 小时后的时间戳
                     localStorage.setItem('token', token);
                     localStorage.setItem('tokenExpiration', expirationTime);
                     window.location.href = '/page/index';

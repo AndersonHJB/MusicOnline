@@ -83,8 +83,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
 
         SaLoginModel model = new SaLoginModel();
-        model.setTimeout(10 *60 * 1000);
-        model.setActiveTimeout(10 *60 * 1000);
+        model.setTimeout(24 * 60 * 60 * 1000);
+        model.setActiveTimeout(24 * 60 * 60 * 1000);
         model.setExtra(LoginHelper.CLIENT_KEY, 1);
         // 生成token
         LoginHelper.login(loginUser, model);

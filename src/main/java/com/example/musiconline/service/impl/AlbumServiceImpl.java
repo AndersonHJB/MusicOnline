@@ -54,7 +54,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
         // 获取专辑信息
         Album album = albumMapper.selectById(bo.getId());
         // 权限校验
-        if (loginUser.getUserRole() != 1 || !album.getCreateBy().equals(loginUser.getUserId())){
+        if (loginUser.getUserRole() != 1 && !album.getCreateBy().equals(loginUser.getUserId())){
             throw new ServiceException("权限不足");
         }
         BeanUtils.copyProperties(bo, album);
@@ -70,7 +70,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
         List<Album> albums = albumMapper.selectBatchIds(ids);
         // 权限校验
         albums.forEach(album -> {
-            if (loginUser.getUserRole() != 1 || !album.getCreateBy().equals(loginUser.getUserId())){
+            if (loginUser.getUserRole() != 1 && !album.getCreateBy().equals(loginUser.getUserId())){
                 throw new ServiceException("权限不足");
             }
         });

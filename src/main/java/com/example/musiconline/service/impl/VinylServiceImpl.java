@@ -48,7 +48,7 @@ public class VinylServiceImpl extends ServiceImpl<VinylMapper, Vinyl> implements
         List<Vinyl> vinyls = vinylMapper.selectBatchIds(ids);
         // 判断是否有权限删除
         vinyls.forEach(vinyl -> {
-            if (!Objects.equals(vinyl.getCreateBy(), loginUser.getUserId()) || loginUser.getUserRole() != 1){
+            if (!Objects.equals(vinyl.getCreateBy(), loginUser.getUserId()) && loginUser.getUserRole() != 1){
                 throw new ServiceException("只能删除自己上传的唱片");
             }
         });
@@ -69,7 +69,7 @@ public class VinylServiceImpl extends ServiceImpl<VinylMapper, Vinyl> implements
         // 查询唱片信息
         Vinyl vinyl = vinylMapper.selectById(bo.getId());
         if (vinyl == null) throw new ServiceException("唱片不存在");
-        if (!Objects.equals(vinyl.getCreateBy(), loginUser.getUserId()) || loginUser.getUserRole() != 1){
+        if (!Objects.equals(vinyl.getCreateBy(), loginUser.getUserId()) && loginUser.getUserRole() != 1){
             throw new ServiceException("您没有权限修改该唱片");
         }
         BeanUtils.copyProperties(bo, vinyl);
