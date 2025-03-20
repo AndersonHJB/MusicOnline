@@ -139,7 +139,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(bo, sysUser);
         // 设置默认密码，MD5加密
-        String md5Hex = DigestUtil.md5Hex(sysUser.getUserName() + "_" + passwordSuffix);
+        String md5Hex = DigestUtil.md5Hex(passwordSuffix);
         sysUser.setUserPassword(md5Hex);
         sysUserMapper.insert(sysUser);
 
@@ -193,7 +193,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (sysUser == null){
             throw new ServiceException("用户不存在");
         }
-        String md5Hex = DigestUtil.md5Hex(sysUser.getUserName() + "_" + passwordSuffix);
+        String md5Hex = DigestUtil.md5Hex(passwordSuffix);
         sysUserMapper.update(null, new LambdaUpdateWrapper<SysUser>()
                 .set(SysUser::getUserPassword, md5Hex)
                 .eq(SysUser::getUserId, id));
