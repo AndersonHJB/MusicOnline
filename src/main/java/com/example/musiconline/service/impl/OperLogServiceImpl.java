@@ -51,6 +51,7 @@ public class OperLogServiceImpl implements OperLogService {
                     .or().like(SysOperLog::getJsonResult, keyword)
                     .or().like(SysOperLog::getErrorMsg, keyword));
         }
+        queryWrapper.orderByDesc(SysOperLog::getOperTime);
         IPage<SysOperLogVo> sysOperLogVoIPage = sysOperLogMapper.selectVoPage(bo.build(), queryWrapper);
 
         return TableDataInfo.build(sysOperLogVoIPage);

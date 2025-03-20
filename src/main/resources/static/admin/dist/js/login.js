@@ -1,4 +1,4 @@
-// 表单登录函数
+
 // 表单登录函数
 $('#loginButton').click(function () {
     var userName = $('#userName').val();
@@ -14,10 +14,13 @@ $('#loginButton').click(function () {
         });
         return false;
     } else {
+        // 使用 MD5 加密密码
+        var encryptedPassword = CryptoJS.MD5(userPassword).toString();
+        
         $.ajax({
             type: 'POST', // 方法类型
             url: '/login',
-            data: JSON.stringify({ userName: userName, userPassword: userPassword }), // 将数据转换为 JSON 格式
+            data: JSON.stringify({ userName: userName, userPassword: encryptedPassword }), // 将数据转换为 JSON 格式
             contentType: 'application/json', // 设置请求头
             success: function (result) {
                 console.log(result);

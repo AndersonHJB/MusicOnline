@@ -6,9 +6,8 @@ $('#registerButton').click(function () {
     var userPassword = $('#userPassword').val();
     var confirmPassword = $('#confirmPassword').val();
 
-
     if (!validUserName(userName)) {
-        swal("请输入有效用户名，3到16位（字母，数字，下划线，减号）", {
+        swal("请输入有效用户名，3到16位（字母，数字，下划线，减号，中文）", {
             icon: "error",
         });
         return false;
@@ -38,10 +37,13 @@ $('#registerButton').click(function () {
         });
         return false;
     } else {
+        // 使用 MD5 加密密码
+        var encryptedPassword = CryptoJS.MD5(userPassword).toString();
+
         $.ajax({
             type: 'POST', // 方法类型
             url: '/register',
-            data: JSON.stringify({ userName: userName, userEmail: userEmail, userPhone: userPhone, userPassword: userPassword }), // 将数据转换为 JSON 格式
+            data: JSON.stringify({ userName: userName, userEmail: userEmail, userPhone: userPhone, userPassword: encryptedPassword }), // 将数据转换为 JSON 格式
             contentType: 'application/json', // 设置请求头
             success: function (result) {
                 console.log(result);

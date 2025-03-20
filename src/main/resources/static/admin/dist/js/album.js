@@ -151,6 +151,9 @@ $('#saveButton').click(function () {
     if (!validCN_ENString2_18(albumName)) {
         $('#edit-error-msg').css("display", "block");
         $('#edit-error-msg').html("请输入符合规范的专辑名称！");
+        setTimeout(function() {
+            $('#edit-error-msg').css("display", "none");
+        }, 1500); // 1.5秒后自动隐藏
     } else {
         var albumCover = $("#albumCover").attr("src"); // 获取封面地址
         var params = {
@@ -266,7 +269,8 @@ function deleteAlbum() {
 /**
  * 随机封面功能
  */
-$('#randomCoverImage').click(function () {
+$('#randomCoverImage').click(function (event) {
+    event.preventDefault(); // 阻止默认行为，防止模态框关闭
     var rand = parseInt(Math.random() * 40 + 1);
     $("#albumCover").attr("src", '/admin/dist/img/rand/' + rand + ".jpg");
     

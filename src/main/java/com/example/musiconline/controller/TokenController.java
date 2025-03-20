@@ -44,7 +44,6 @@ public class TokenController {
     /**
      * 退出登录
      */
-    @Log(title = "退出登录", businessType = BusinessType.FORCE)
     @PostMapping("logout")
     public R<Void> logout(HttpServletRequest request) {
         sysUserService.logout();

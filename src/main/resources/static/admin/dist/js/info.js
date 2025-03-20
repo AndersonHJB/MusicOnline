@@ -62,9 +62,13 @@ $(function () {
         var originalPassword = $('#originalPassword').val();
         var newPassword = $('#newPassword').val();
         if (validPasswordForUpdate(originalPassword, newPassword)) {
+            // 使用 MD5 加密密码
+            var encryptedOriginalPassword = CryptoJS.MD5(originalPassword).toString();
+            var encryptedNewPassword = CryptoJS.MD5(newPassword).toString();
+
             var params = {
-                originalPassword: originalPassword,
-                newPassword: newPassword
+                originalPassword: encryptedOriginalPassword,
+                newPassword: encryptedNewPassword
             };
             $.ajax({
                 type: "POST",

@@ -3,6 +3,7 @@ package com.example.musiconline.service.impl;
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
@@ -137,8 +138,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 保存用户
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(bo, sysUser);
-        // 设置默认密码
-        sysUser.setUserPassword(sysUser.getUserName() + "_" + passwordSuffix);
+        // 设置默认密码，MD5加密
+        String md5Hex = DigestUtil.md5Hex(sysUser.getUserName() + "_" + passwordSuffix);
+        sysUser.setUserPassword(md5Hex);
         sysUserMapper.insert(sysUser);
 
     }
@@ -191,8 +193,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (sysUser == null){
             throw new ServiceException("用户不存在");
         }
+        String md5Hex = DigestUtil.md5Hex(sysUser.getUserName() + "_" + passwordSuffix);
         sysUserMapper.update(null, new LambdaUpdateWrapper<SysUser>()
-                .set(SysUser::getUserPassword, sysUser.getUserName() + "_" + passwordSuffix)
+                .set(SysUser::getUserPassword, md5Hex)
                 .eq(SysUser::getUserId, id));
     }
 
