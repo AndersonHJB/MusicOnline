@@ -41,14 +41,15 @@ user:
 
 # Spring配置
 spring:
-  profiles:
-    active: dev
   application:
     name: musicOnline
   threads:
     # 开启虚拟线程 仅jdk21可用
     virtual:
       enabled: false
+  web:
+    resources:
+      static-locations: classpath:/static/, file:D:/musicOnline/file/
   # 文件上传
   servlet:
     multipart:
@@ -182,3 +183,9 @@ security:
     - /upload/**
     - /
 
+
+
+#文件上传默认url前缀
+file:
+  upload:
+    dic: D:/musicOnline/file/
